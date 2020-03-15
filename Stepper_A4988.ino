@@ -81,7 +81,7 @@ void loop() {
   if (runIn.fell()) {
     for (int i = 0; i < 200; i++) {
       // read pot and set a delay to control speed
-      int motSpeed = map(analogRead(speedPot), 0, 1023, 100, 10000);  
+      int motSpeed = map(analogRead(speedPot), 0, 1023, 5000, 200);
 
       // advance motor one step at the pot delay setting/speed
       digitalWrite(motStepPin, HIGH);
@@ -94,7 +94,7 @@ void loop() {
   // cycle through micro step configuration options
   if (msIn.fell()) {
     msMode++;
-    if (msMode >= 4) msMode = 0;
+    if (msMode >= 5) msMode = 0;
     digitalWrite(motMS1Pin, bitRead(microSteps[msMode], 2));
     digitalWrite(motMS2Pin, bitRead(microSteps[msMode], 1));
     digitalWrite(motMS3Pin, bitRead(microSteps[msMode], 0));
